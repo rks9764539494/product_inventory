@@ -22,6 +22,6 @@ Route::get('inventory/index',[InventoryController::class,'index'])->name('invent
 Route::get('inventory/create',[InventoryController::class,'create'])->name('inventory.create');
 Route::post('inventory/store',[InventoryController::class,'store'])->name('inventory.store');
 Route::get('inventory/{id}/edit',[InventoryController::class,'edit'])->name('inventory.edit');
-Route::put('inventory/{id}/update',[InventoryController::class,'update'])->name('inventory.update');
+Route::post('inventory/{id}/update',[InventoryController::class,'update'])->name('inventory.update');
 Route::get('inventory/{id}/show',[InventoryController::class,'show'])->name('inventory.show');
 Route::delete('inventory/{id}/destroy',[InventoryController::class,'destroy'])->name('inventory.destroy');

@@ -27,7 +27,10 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form> --}}
-                    <a href="{{ route('inventory.create') }}" class="m-2 btn btn-primary">Add</a>
+                    <a href="{{ route('inventory.create') }}" class="m-2 btn btn-primary">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Inventory
+                    </a>
                 </div>
             </div>
         </nav>
