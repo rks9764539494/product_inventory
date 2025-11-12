@@ -17,7 +17,7 @@ class CreateInventoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('price');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('stock');
             $table->timestamps();
         });

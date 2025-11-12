@@ -11,9 +11,9 @@
         </tr>
     </thead>
     <tbody class="table-group-divider">
-        @forelse ($inventories as $item)
+        @forelse ($inventories as $key => $item)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $key+1 }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->stock }}</td>
@@ -34,6 +34,11 @@
             </tr>
         @endforelse
         </tr>
+        
     </tbody>
 </table>
+{{-- {{ $inventories->links() }} --}}
+@endsection
+@section("flash_message")
+<span class="text-success"> {{ Session::get('success'); }} </span>
 @endsection

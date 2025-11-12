@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class InventoryController extends Controller
 {
     public function index()
     {
-        return view('inventory.index',['inventories'=>Inventory::all()]);
+        return view('inventory.index',['inventories'=>Inventory::get()]);
     }
     public function create()
     {
@@ -17,8 +18,14 @@ class InventoryController extends Controller
     }
     public function store(Request $request)
     {
-        Inventory::create($request->all());
-        return redirect()->route('inventory.index')->with('success', 'Item created successfully!');
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:inventories',
+            'price' => 'required',
+            'description' => 'nullable|string',
+            'stock' => 'required',
+        ]);
+        $item = Inventory::create($validatedData);
+        return redirect()->route('inventory.index')->with('success', 'Item created successfully with name: " '. $item->name .' "and stock: "'. $item->stock.'"');
     }
     public function show($id)
     {
@@ -31,8 +38,15 @@ class InventoryController extends Controller
     public function update(Request $request, $id)
     {
         $item = Inventory::findOrFail($id);
-        $item->update($request->all());
-        return redirect()->route('inventory.index')->with('success', 'Item updated successfully!');
+        $validatedData = $request->validate([
+            'name' => ['required','string','max:255',Rule::unique('inventories')->ignore($id)],
+            'price' => 'required',
+            'description' => 'nullable|string',
+            'stock' => 'required',
+        ]);
+        $item->update($validatedData);
+
+        return redirect()->route('inventory.index')->with('success', 'Item updated successfully with name: " '. $item->name .' "and stock: "'. $item->stock.'"');
     }
     public function destroy($id)
     {
