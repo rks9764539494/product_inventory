@@ -40,5 +40,5 @@
 {{-- {{ $inventories->links() }} --}}
 @endsection
 @section("flash_message")
-<span class="text-success"> {{ Session::get('success'); }} </span>
+<span class="text-success"> {{ Session::get('success') }} </span>
 @endsection
